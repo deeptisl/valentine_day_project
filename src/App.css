@@ -1,0 +1,544 @@
+/* Main App Container */
+.app-container {
+  min-height: 100vh;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 20px;
+  z-index: 1;
+}
+
+/* Header Styles */
+.header {
+  text-align: center;
+  padding: 30px 20px;
+  animation: slideIn 0.8s ease-out;
+}
+
+.header h1 {
+  font-family: 'Dancing Script', cursive;
+  font-size: 3.5rem;
+  color: var(--deep-pink);
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
+  margin-bottom: 10px;
+}
+
+.header .subtitle {
+  font-family: 'Dancing Script', cursive;
+  font-size: 1.8rem;
+  color: var(--primary-pink);
+  animation: pulse 2s ease-in-out infinite;
+}
+
+.heart-icon {
+  font-size: 2rem;
+  animation: heartbeat 1.5s ease-in-out infinite;
+  display: inline-block;
+  margin: 0 10px;
+}
+
+/* Navigation / Week Cards Container */
+.week-container {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 25px;
+  max-width: 1200px;
+  width: 100%;
+  padding: 30px;
+  margin-top: 20px;
+}
+
+/* Day Card Styles */
+.day-card {
+  background: linear-gradient(145deg, rgba(255, 255, 255, 0.95), rgba(255, 230, 235, 0.95));
+  border-radius: 25px;
+  padding: 30px;
+  text-align: center;
+  cursor: pointer;
+  transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  box-shadow: 0 10px 30px rgba(196, 69, 105, 0.2);
+  position: relative;
+  overflow: hidden;
+  animation: fadeIn 0.5s ease-out;
+  animation-fill-mode: both;
+}
+
+.day-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(120deg, transparent, rgba(255, 255, 255, 0.6), transparent);
+  transition: left 0.5s;
+}
+
+.day-card:hover::before {
+  left: 100%;
+}
+
+.day-card:hover {
+  transform: translateY(-10px) scale(1.02);
+  box-shadow: 0 20px 50px rgba(196, 69, 105, 0.3);
+}
+
+.day-card .icon {
+  font-size: 4rem;
+  margin-bottom: 15px;
+  display: block;
+  animation: bounce 2s ease infinite;
+}
+
+.day-card h3 {
+  font-family: 'Dancing Script', cursive;
+  font-size: 1.8rem;
+  color: var(--deep-pink);
+  margin-bottom: 8px;
+}
+
+.day-card .date {
+  font-size: 0.9rem;
+  color: var(--primary-pink);
+  font-weight: 500;
+}
+
+.day-card .description {
+  margin-top: 15px;
+  font-size: 0.95rem;
+  color: #666;
+  line-height: 1.5;
+}
+
+/* Animation delays for cards */
+.day-card:nth-child(1) {
+  animation-delay: 0.1s;
+}
+
+.day-card:nth-child(2) {
+  animation-delay: 0.2s;
+}
+
+.day-card:nth-child(3) {
+  animation-delay: 0.3s;
+}
+
+.day-card:nth-child(4) {
+  animation-delay: 0.4s;
+}
+
+.day-card:nth-child(5) {
+  animation-delay: 0.5s;
+}
+
+.day-card:nth-child(6) {
+  animation-delay: 0.6s;
+}
+
+.day-card:nth-child(7) {
+  animation-delay: 0.7s;
+}
+
+.day-card:nth-child(8) {
+  animation-delay: 0.8s;
+}
+
+/* Disabled Day Card Styles */
+.day-card-disabled {
+  opacity: 0.6;
+  filter: grayscale(50%);
+  cursor: not-allowed !important;
+}
+
+.day-card-disabled::before {
+  display: none;
+}
+
+.day-card-disabled:hover {
+  transform: none;
+  box-shadow: 0 10px 30px rgba(196, 69, 105, 0.2);
+}
+
+.day-card-disabled .icon {
+  animation: none;
+  filter: grayscale(30%);
+}
+
+.coming-soon-badge {
+  position: absolute;
+  top: 15px;
+  right: 15px;
+  background: linear-gradient(135deg, #95a5a6, #7f8c8d);
+  color: white;
+  padding: 6px 14px;
+  border-radius: 20px;
+  font-size: 0.75rem;
+  font-weight: 600;
+  box-shadow: 0 3px 10px rgba(0, 0, 0, 0.15);
+}
+
+/* Special disabled state for Valentine's Day */
+.valentine-special.day-card-disabled {
+  background: linear-gradient(145deg, #bdc3c7, #95a5a6);
+}
+
+.valentine-special.day-card-disabled:hover {
+  background: linear-gradient(145deg, #bdc3c7, #95a5a6);
+}
+
+/* Back Button */
+.back-btn {
+  background: linear-gradient(135deg, var(--primary-pink), var(--deep-pink));
+  color: white;
+  border: none;
+  padding: 12px 30px;
+  border-radius: 50px;
+  font-size: 1rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  margin-bottom: 20px;
+  box-shadow: 0 5px 15px rgba(196, 69, 105, 0.3);
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.back-btn:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 8px 25px rgba(196, 69, 105, 0.4);
+}
+
+/* Day Detail Page */
+.day-detail {
+  max-width: 800px;
+  width: 100%;
+  padding: 20px;
+  animation: slideIn 0.5s ease-out;
+}
+
+.day-detail-card {
+  background: linear-gradient(145deg, rgba(255, 255, 255, 0.98), rgba(255, 230, 235, 0.95));
+  border-radius: 30px;
+  padding: 50px;
+  text-align: center;
+  box-shadow: 0 20px 60px rgba(196, 69, 105, 0.25);
+}
+
+.day-detail-card .icon {
+  font-size: 6rem;
+  margin-bottom: 20px;
+  display: block;
+  animation: heartbeat 1.5s ease-in-out infinite;
+}
+
+.day-detail-card h2 {
+  font-family: 'Dancing Script', cursive;
+  font-size: 3rem;
+  color: var(--deep-pink);
+  margin-bottom: 15px;
+}
+
+.day-detail-card .date {
+  font-size: 1.1rem;
+  color: var(--primary-pink);
+  font-weight: 500;
+  margin-bottom: 25px;
+}
+
+.day-detail-card .message {
+  font-family: 'Dancing Script', cursive;
+  font-size: 1.8rem;
+  color: var(--deep-pink);
+  line-height: 1.8;
+  margin: 30px 0;
+  padding: 20px;
+  background: linear-gradient(135deg, rgba(255, 107, 157, 0.1), rgba(255, 182, 193, 0.2));
+  border-radius: 20px;
+  border-left: 4px solid var(--primary-pink);
+}
+
+.day-detail-card .love-note {
+  font-style: italic;
+  color: #888;
+  margin-top: 30px;
+  font-size: 1rem;
+}
+
+.day-detail-card .signature {
+  font-family: 'Dancing Script', cursive;
+  font-size: 1.5rem;
+  color: var(--deep-pink);
+  margin-top: 20px;
+}
+
+/* Valentine's Day Special */
+.valentine-special {
+  background: linear-gradient(145deg, #e74c3c, #c0392b);
+  color: white;
+}
+
+.valentine-special h3,
+.valentine-special .date,
+.valentine-special .description {
+  color: white;
+}
+
+.valentine-special:hover {
+  background: linear-gradient(145deg, #c0392b, #a93226);
+}
+
+/* Valentine Page Styles */
+.valentine-page {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 80vh;
+  text-align: center;
+  padding: 30px;
+  animation: fadeIn 0.8s ease-out;
+}
+
+.valentine-question {
+  background: linear-gradient(145deg, rgba(255, 255, 255, 0.98), rgba(255, 230, 235, 0.95));
+  border-radius: 30px;
+  padding: 60px 50px;
+  box-shadow: 0 20px 60px rgba(196, 69, 105, 0.25);
+  max-width: 600px;
+  width: 100%;
+  position: relative;
+}
+
+.valentine-question .heart-big {
+  font-size: 5rem;
+  display: block;
+  margin-bottom: 20px;
+  animation: heartbeat 1.5s ease-in-out infinite;
+}
+
+.valentine-question h2 {
+  font-family: 'Dancing Script', cursive;
+  font-size: 2.5rem;
+  color: var(--deep-pink);
+  margin-bottom: 30px;
+  line-height: 1.4;
+}
+
+.valentine-question p {
+  font-size: 1.2rem;
+  color: #666;
+  margin-bottom: 40px;
+}
+
+.button-container {
+  display: flex;
+  justify-content: center;
+  gap: 30px;
+  flex-wrap: wrap;
+  position: relative;
+  min-height: 100px;
+}
+
+.yes-btn {
+  background: linear-gradient(135deg, #e74c3c, #c0392b);
+  color: white;
+  border: none;
+  padding: 18px 50px;
+  border-radius: 50px;
+  font-size: 1.3rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 8px 25px rgba(231, 76, 60, 0.4);
+  z-index: 10;
+}
+
+.yes-btn:hover {
+  transform: scale(1.1);
+  box-shadow: 0 12px 35px rgba(231, 76, 60, 0.5);
+}
+
+.no-btn {
+  background: linear-gradient(135deg, #95a5a6, #7f8c8d);
+  color: white;
+  border: none;
+  padding: 18px 50px;
+  border-radius: 50px;
+  font-size: 1.3rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.1s ease;
+  box-shadow: 0 8px 25px rgba(149, 165, 166, 0.4);
+  position: absolute;
+}
+
+/* Valentine Success Page */
+.valentine-success {
+  background: linear-gradient(145deg, rgba(255, 255, 255, 0.98), rgba(255, 230, 235, 0.95));
+  border-radius: 30px;
+  padding: 60px 50px;
+  box-shadow: 0 20px 60px rgba(196, 69, 105, 0.25);
+  max-width: 700px;
+  width: 100%;
+  text-align: center;
+  animation: slideIn 0.8s ease-out;
+  position: relative;
+  overflow: hidden;
+}
+
+.valentine-success .hearts-rain {
+  font-size: 4rem;
+  margin-bottom: 20px;
+  animation: heartbeat 1s ease-in-out infinite;
+}
+
+.valentine-success h1 {
+  font-family: 'Dancing Script', cursive;
+  font-size: 3.5rem;
+  color: var(--deep-pink);
+  margin-bottom: 20px;
+  background: linear-gradient(135deg, #e74c3c, #ff6b9d, #c44569);
+  background-size: 200% auto;
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  animation: shimmer 3s linear infinite;
+}
+
+.valentine-success .love-message {
+  font-family: 'Dancing Script', cursive;
+  font-size: 2rem;
+  color: var(--deep-pink);
+  line-height: 1.8;
+  margin: 30px 0;
+  padding: 25px;
+  background: linear-gradient(135deg, rgba(231, 76, 60, 0.1), rgba(255, 107, 157, 0.15));
+  border-radius: 20px;
+  border: 2px dashed var(--primary-pink);
+}
+
+.valentine-success .special-text {
+  font-size: 1.3rem;
+  color: #666;
+  margin: 20px 0;
+  line-height: 1.8;
+}
+
+.valentine-success .couple-names {
+  font-family: 'Dancing Script', cursive;
+  font-size: 2.5rem;
+  color: var(--deep-red);
+  margin: 30px 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 15px;
+}
+
+.valentine-success .couple-names .heart {
+  color: var(--red);
+  animation: heartbeat 1s ease-in-out infinite;
+}
+
+.valentine-success .forever {
+  font-family: 'Dancing Script', cursive;
+  font-size: 1.8rem;
+  color: var(--primary-pink);
+  margin-top: 20px;
+}
+
+/* Confetti */
+.confetti-container {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 100;
+  overflow: hidden;
+}
+
+.confetti {
+  position: absolute;
+  width: 10px;
+  height: 10px;
+  animation: confetti-fall 4s linear forwards;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .header h1 {
+    font-size: 2.5rem;
+  }
+
+  .header .subtitle {
+    font-size: 1.4rem;
+  }
+
+  .week-container {
+    grid-template-columns: 1fr;
+    padding: 15px;
+  }
+
+  .day-card {
+    padding: 25px;
+  }
+
+  .day-detail-card {
+    padding: 30px 20px;
+  }
+
+  .day-detail-card h2 {
+    font-size: 2.2rem;
+  }
+
+  .valentine-question,
+  .valentine-success {
+    padding: 40px 25px;
+  }
+
+  .valentine-question h2 {
+    font-size: 2rem;
+  }
+
+  .button-container {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .yes-btn,
+  .no-btn {
+    padding: 15px 40px;
+    font-size: 1.1rem;
+  }
+
+  .valentine-success h1 {
+    font-size: 2.5rem;
+  }
+
+  .valentine-success .love-message {
+    font-size: 1.5rem;
+  }
+
+  .valentine-success .couple-names {
+    font-size: 2rem;
+    flex-wrap: wrap;
+  }
+}
+
+@media (max-width: 480px) {
+  .header h1 {
+    font-size: 2rem;
+  }
+
+  .day-card .icon {
+    font-size: 3rem;
+  }
+
+  .day-card h3 {
+    font-size: 1.5rem;
+  }
+}
