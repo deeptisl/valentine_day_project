@@ -11,8 +11,7 @@ function App() {
   const [currentView, setCurrentView] = useState('home'); // 'home', 'detail', 'valentine'
   const [selectedDay, setSelectedDay] = useState(null);
 
-  console.log('Current View:', currentView);
-  console.log('Selected Day:', selectedDay);
+
 
   const handleDayClick = (day) => {
     if (day.isSpecial) {
